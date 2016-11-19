@@ -14,7 +14,8 @@ public class E14Q3 {
         System.out.println(q.isEmpty());
         System.out.println(q.dequeue());
         System.out.println(q.dequeue());
-        System.out.println(q.isEmpty());
+        System.out.println(q.isEmpty() + "\n");
+
 
         PriorityQueue<String> pq = new PriorityQueue<>();
         System.out.println(pq.enqueue("a", 0));

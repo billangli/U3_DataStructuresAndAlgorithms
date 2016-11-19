@@ -7,7 +7,7 @@
 package E14;
 
 public class BinaryTree<I extends Comparable> {
-    TreeNode<I> root;
+    private TreeNode<I> root;
 
     // Checking if a tree contains a certain item
     boolean contains(I item) {
@@ -23,6 +23,24 @@ public class BinaryTree<I extends Comparable> {
             condition = contains(temp.getRightChild(), item);
         }
         return (temp.getItem().equals(item)) || (condition);
+    }
+
+    // Getting a node from the tree
+    TreeNode get(I item) {
+        TreeNode temp = this.getRoot();
+        while (true) {
+            if (temp.getItem().equals(item)) {
+                return temp;
+            } else if (temp.isLeaf()) {
+                return null;
+            } else if (temp.compareTo(item) >= 0) {
+                // Item <= Temp, go left
+                temp = temp.getLeftChild();
+            } else if (temp.compareTo(item) < 0) {
+                // Item > Temp, go right
+                temp = temp.getRightChild();
+            }
+        }
     }
 
     // Checking the size of a tree
@@ -76,23 +94,23 @@ public class BinaryTree<I extends Comparable> {
             // The temp node only has one child
             if (tempNode.getLeftChild() != null) {
                 // Temp node only has left child
-                if (tempNode.compareTo(newNode.getItem()) > 0) {
-                    // New < Temp
+                if (tempNode.compareTo(newNode.getItem()) >= 0) {
+                    // New <= Temp
                     return add(tempNode.getLeftChild(), newNode);
-                } else if (tempNode.compareTo(newNode.getItem()) <= 0) {
-                    // New >= Temp
+                } else if (tempNode.compareTo(newNode.getItem()) < 0) {
+                    // New > Temp
                     tempNode.setRightChild(newNode);
                     return true;
                 }
             } else if (tempNode.getRightChild() != null) {
                 // Temp node only has right child
-                if (tempNode.compareTo(newNode.getItem()) < 0) {
-                    // New > temp
-                    return add(tempNode.getRightChild(), newNode);
-                } else if (tempNode.compareTo(newNode.getItem()) >= 0) {
-                    // New <= temp
-                    tempNode.setRightChild(newNode);
+                if (tempNode.compareTo(newNode.getItem()) <= 0) {
+                    // New >= temp
+                    tempNode.setLeftChild(newNode);
                     return true;
+                } else if (tempNode.compareTo(newNode.getItem()) > 0) {
+                    // New < temp
+                    return add(tempNode.getRightChild(), newNode);
                 }
             }
             return false;

@@ -27,5 +27,6 @@ public class BinaryTreeTest {
         System.out.println(bt.getRoot().getRightChild().getRightChild().getItem());
         System.out.println(bt.contains("g"));
         System.out.println(bt.contains("abc"));
+        System.out.println(bt.get("b").getRightChild().getItem());
     }
 }
