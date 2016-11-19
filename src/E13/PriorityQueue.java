@@ -4,7 +4,7 @@
  Created by Bill Li on 2016-11-15.
  */
 
-package E14;
+package E13;
 
 public class PriorityQueue<I> {
     PriorityNode<I> head = new PriorityNode(null);
@@ -46,7 +46,7 @@ public class PriorityQueue<I> {
                 temp = (PriorityNode) temp.getNext();
                 repeat = true;
             } else {
-                item = (I) temp.getItem();
+                item = temp.getItem();
                 temp.getPrevious().setNext(null);
             }
         }
